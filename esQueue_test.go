@@ -38,17 +38,17 @@ func TestQueuePutGet(t *testing.T) {
 		isPrintf = false
 	)
 
-	cnt := 10000
+	cnt := 100000
 	sum := 0
 	start := time.Now()
 	var putD, getD time.Duration
 	for i := 1; i <= runtime.NumCPU()*MAX_CPU_MULTI; i *= 2 {
-		sum += i * cnt
+		sum += cnt
 		start := time.Now()
-		put, get := testQueuePutGet(t, i, cnt)
+		put, get := testQueuePutGet(t, i, cnt/i)
 		end := time.Now()
 		use := end.Sub(start)
-		op := use / time.Duration(sum)
+		op := use / time.Duration(cnt)
 		fmt.Printf("%v, Grp: %3d, Times: %10d, miss:%6v, use: %12v, %8v/op\n",
 			runtime.Version(), i, sum, 0, use, op)
 		putD += put
