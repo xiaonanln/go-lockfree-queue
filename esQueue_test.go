@@ -38,7 +38,7 @@ func TestQueuePutGet(t *testing.T) {
 	sum := 0
 	start := time.Now()
 	var putD, getD time.Duration
-	for i := 0; i <= runtime.NumCPU()*4; i++ {
+	for i := 0; i <= runtime.NumCPU()*4; i *= 2 {
 		sum += i * cnt
 		put, get := testQueuePutGet(t, i, cnt)
 		putD += put
@@ -60,7 +60,7 @@ func TestQueueGeneral(t *testing.T) {
 
 	var miss, Sum int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i++ {
+	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
 		cnt := 10000 * 100
 		if i > 9 {
 			cnt = 10000 * 10
@@ -84,7 +84,7 @@ func TestQueueGeneral(t *testing.T) {
 func TestQueuePutGoGet(t *testing.T) {
 	var Sum, miss int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i++ {
+	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
 		//	for i := 2; i <= 2; i++ {
 		cnt := 10000 * 100
 		if i > 9 {
@@ -112,7 +112,7 @@ func TestQueuePutDoGet(t *testing.T) {
 
 	var miss, Sum int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i++ {
+	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
 		//	for i := 2; i <= 2; i++ {
 		cnt := 10000 * 100
 		if i > 9 {
