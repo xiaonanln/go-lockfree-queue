@@ -1,5 +1,5 @@
 # go-lockfree-queue
-Lock free queue in golang (multiple producers, multiple consumers)
+High-performance lock-free queue in golang (multiple producers, multiple consumers)
 
 Since I develop this package after reading through yireyun's code, The project look just like [yireyun/go-queue](https://github.com/yireyun/go-queue) and I also used some code from yireyun's project.
 
