@@ -158,7 +158,7 @@ func testQueuePutGet(t *testing.T, grp, cnt int) (
 				val := fmt.Sprintf("Node.%d.%d.%d", g, j, atomic.AddInt32(&id, 1))
 				ok := q.Put(&val)
 				for !ok {
-					time.Sleep(time.Microsecond)
+					runtime.Gosched()
 					ok = q.Put(&val)
 				}
 			}
