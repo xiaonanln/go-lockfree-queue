@@ -38,7 +38,7 @@ func TestQueuePutGet(t *testing.T) {
 	sum := 0
 	start := time.Now()
 	var putD, getD time.Duration
-	for i := 0; i <= runtime.NumCPU()*4; i *= 2 {
+	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
 		sum += i * cnt
 		put, get := testQueuePutGet(t, i, cnt)
 		putD += put
