@@ -1,2 +1,2 @@
 # go-lockfree-queue
-Lock free queue in golang
+Lock free queue in golang (implementing ...)
