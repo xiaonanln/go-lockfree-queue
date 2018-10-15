@@ -6,9 +6,12 @@ import (
 )
 
 type Queue struct {
-	capacity       uint32
 	capacityMod    uint32
-	getPos, putPos uint32
+	capacity       uint32
+	getPos uint32
+    _1 [64]byte
+    putPos uint32
+    // _2 [64]byte
 	entries        []queueEntry
 }
 

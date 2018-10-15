@@ -38,7 +38,7 @@ func TestQueuePutGet(t *testing.T) {
 		isPrintf = false
 	)
 
-	cnt := 100000
+	cnt := 1000000
 	sum := 0
 	start := time.Now()
 	var putD, getD time.Duration
