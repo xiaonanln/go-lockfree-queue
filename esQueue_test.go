@@ -9,6 +9,10 @@ import (
 	"time"
 )
 
+const (
+	MAX_CPU_MULTI = 256
+)
+
 func TestQueue(t *testing.T) {
 	q := NewQueue(8)
 	ok := q.Put(&value)
@@ -38,9 +42,15 @@ func TestQueuePutGet(t *testing.T) {
 	sum := 0
 	start := time.Now()
 	var putD, getD time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
+	for i := 1; i <= runtime.NumCPU()*MAX_CPU_MULTI; i *= 2 {
 		sum += i * cnt
+		start := time.Now()
 		put, get := testQueuePutGet(t, i, cnt)
+		end := time.Now()
+		use := end.Sub(start)
+		op := use / time.Duration(sum)
+		fmt.Printf("%v, Grp: %3d, Times: %10d, miss:%6v, use: %12v, %8v/op\n",
+			runtime.Version(), i, sum, 0, use, op)
 		putD += put
 		getD += get
 	}
@@ -60,7 +70,7 @@ func TestQueueGeneral(t *testing.T) {
 
 	var miss, Sum int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
+	for i := 1; i <= runtime.NumCPU()*MAX_CPU_MULTI; i *= 2 {
 		cnt := 10000 * 100
 		if i > 9 {
 			cnt = 10000 * 10
@@ -84,7 +94,7 @@ func TestQueueGeneral(t *testing.T) {
 func TestQueuePutGoGet(t *testing.T) {
 	var Sum, miss int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
+	for i := 1; i <= runtime.NumCPU()*MAX_CPU_MULTI; i *= 2 {
 		//	for i := 2; i <= 2; i++ {
 		cnt := 10000 * 100
 		if i > 9 {
@@ -112,7 +122,7 @@ func TestQueuePutDoGet(t *testing.T) {
 
 	var miss, Sum int
 	var Use time.Duration
-	for i := 1; i <= runtime.NumCPU()*4; i *= 2 {
+	for i := 1; i <= runtime.NumCPU()*MAX_CPU_MULTI; i *= 2 {
 		//	for i := 2; i <= 2; i++ {
 		cnt := 10000 * 100
 		if i > 9 {
