@@ -1,1 +1,1 @@
-package lfque
+package lfqueue

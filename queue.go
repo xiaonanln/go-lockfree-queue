@@ -1,4 +1,4 @@
-package lfque
+package lfqueue
 
 type Queue struct {
 	capacity       uint32
